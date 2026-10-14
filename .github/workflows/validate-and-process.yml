@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  issues: write
 
 jobs:
   validate-host-config:
@@ -58,7 +57,7 @@ jobs:
 
           # Validate required fields
           if [[ -z "$TOKEN" || "$TOKEN" == "<evalai_user_auth_token>" ]]; then
-            echo "❌ Invalid or missing token" | tee -a validation_error.log
+            echo "❌ Missing EVALAI_AUTH_TOKEN repository Actions secret (or placeholder value)." | tee -a validation_error.log
             echo "is_valid=false" >> $GITHUB_OUTPUT
           fi
 
@@ -72,21 +71,19 @@ jobs:
             echo "is_valid=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create issue if invalid
-        if: steps.validate.outputs.is_valid == 'false'
-        uses: peter-evans/create-issue-from-file@v4
-        with:
-          title: "host_config.json validation failed"
-          content-filepath: validation_error.log
-          labels: |
-            bug
-            config
-            self-hosted
-
-      - name: Fail job if invalid
+      - name: Report host configuration errors
         if: steps.validate.outputs.is_valid == 'false'
         run: |
-          echo "❌ host_config.json validation failed. See issue for details."
+          echo "::error::Host configuration validation failed. See errors below."
+          cat validation_error.log
+          {
+            echo "## Host configuration validation failed"
+            echo
+            cat validation_error.log
+            echo
+            echo "Configure EVALAI_AUTH_TOKEN in Settings > Secrets and variables > Actions."
+            echo "Set team_pk to the numeric EvalAI team ID in github/host_config.json."
+          } >> "$GITHUB_STEP_SUMMARY"
           exit 1
 
   check-self-hosted-requirements:
