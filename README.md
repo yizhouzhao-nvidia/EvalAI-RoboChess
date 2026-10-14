@@ -1,3 +1,27 @@
+# RoboChess Pick-and-Place Benchmark
+
+This repository accepts small ZIP submissions with pinned PyTorch model links, code
+references, and inference instructions. Checkpoints (approximately 3–32 billion
+parameters) stay on Hugging Face or another accessible host. Organizers download
+the instructions, fetch the pinned artifacts separately, and evaluate locally.
+The official ranking uses only organizer-verified pick-and-place success rate (%).
+Participants can optionally provide unverified self-reported scores as metadata.
+
+See [the organizer workflow](remote_challenge_evaluation/README.md) for checkpoint
+downloads and score publication. The challenge configuration is an unpublished draft;
+finalize the trial protocol, dates, limits, rules, logo, and access to linked artifacts before
+launch. The remote API workflow needs a staging integration check.
+
+Set the GitHub Actions secret `EVALAI_AUTH_TOKEN` to your EvalAI host token, and
+set `team_pk` to the numeric team ID in `github/host_config.json`. The `AUTH_TOKEN`
+secret remains the GitHub personal access token. Do not commit EvalAI credentials.
+A local credential copy, if present, is ignored at `github/host_config.local.json`.
+
+The starter repository setup instructions are preserved below; use the secret
+configuration above instead of committing the EvalAI token to the JSON file.
+
+---
+
 ## How to create a challenge on EvalAI?
 
 If you are looking for a simple challenge configuration that you can replicate to create a challenge on EvalAI, then you are at the right place. Follow the instructions given below to get started.

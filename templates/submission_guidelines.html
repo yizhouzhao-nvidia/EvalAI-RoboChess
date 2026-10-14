@@ -1,1 +1,20 @@
-<p>Submit any blank file here to see a random number generated for your submission. If you get lucky, you might reach the top of the leaderboard.</p>
+<h2>Linked checkpoint submission</h2>
+<p>Upload a small <strong>.zip</strong> containing model links, code references, and instructions for local inference. Host your PyTorch checkpoint on Hugging Face or another service accessible to organizers; you do not need to upload the weights to EvalAI.</p>
+<h3>Required package contents</h3>
+<ul>
+<li><strong>Model reference:</strong> the repository URL, exact immutable revision (for Hugging Face, the full commit hash), and checkpoint filenames or shard index. Pin configuration, tokenizer, preprocessing, and any other required assets as well.</li>
+<li><strong>Code reference:</strong> the GitHub repository URL and full commit hash, or inference code included in the ZIP. Pin any submodules and external dependencies.</li>
+<li><strong>README:</strong> exact model download, environment setup, and inference commands; explain the observation inputs and robot action outputs.</li>
+<li><strong>Runtime requirements:</strong> dependency manifest or a pinned environment reference, Python/PyTorch/CUDA versions, GPU memory requirements, model parameter count, and checkpoint precision.</li>
+<li><strong>Access and licenses:</strong> document access requirements and licenses for the model, code, and assets. Keep the referenced artifacts accessible throughout evaluation.</li>
+</ul>
+<p>A moving branch such as <code>main</code> or a mutable tag alone is insufficient. Organizers evaluate the exact revisions recorded in your ZIP. To change the checkpoint or code, make a new submission.</p>
+<p>For private or gated models, arrange organizer access before evaluation. Do not include tokens, passwords, or other credentials in the submission.</p>
+<h3>Submitting to EvalAI</h3>
+<p>Upload the instructions ZIP through EvalAI's submission interface or use the CLI with the actual challenge and phase IDs:</p>
+<pre>evalai challenge CHALLENGE_ID phase PHASE_ID submit --file submission.zip --public</pre>
+<p>See <a href="https://cli.eval.ai/">EvalAI CLI instructions</a> for installation and authentication. The example opts into public leaderboard visibility. Use <code>--private</code> if you do not want a public entry; a private submission may need a visibility change before its verified score appears on the leaderboard.</p>
+<p>The checkpoint stays on the external model host. The ZIP should contain the references and inference instructions.</p>
+<h3>Participant-reported scores</h3>
+<p>Optionally enter success rate (%) and successful/total trial counts in the self-report fields. Explain the evaluation setup. These unverified claims do not affect the official ranking.</p>
+<p>Upload does not produce an immediate score. Organizers download the ZIP, fetch the pinned model and code separately, run local trials, and publish verified results afterward.</p>

@@ -52,7 +52,7 @@ class EvalAI_Interface:
         headers = self.get_request_headers()
         try:
             response = requests.request(
-                method=method, url=url, headers=headers, data=data
+                method=method, url=url, headers=headers, data=data, timeout=(30, 120)
             )
             response.raise_for_status()
         except requests.exceptions.RequestException:

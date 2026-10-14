@@ -11,3 +11,10 @@ venv/
 # cache
 __pycache__
 *.pyc
+
+# Organizer-only checkpoints and records
+local_submissions/
+*.zip.part
+
+# Local EvalAI credentials
+github/host_config.local.json

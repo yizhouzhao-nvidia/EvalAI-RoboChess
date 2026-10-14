@@ -1,5 +1,5 @@
 {
-	"token": "<evalai_user_auth_token>",
-	"team_pk": "<host_team_pk>",
-	"evalai_host_url": "<evalai_host_url>"
+  "token": "<set EVALAI_AUTH_TOKEN in GitHub Actions secrets>",
+  "team_pk": "<host_team_pk>",
+  "evalai_host_url": "https://eval.ai"
 }

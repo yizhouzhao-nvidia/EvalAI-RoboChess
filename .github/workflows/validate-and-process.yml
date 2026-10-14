@@ -23,6 +23,8 @@ jobs:
 
       - name: Validate host_config.json
         id: validate
+        env:
+          EVALAI_AUTH_TOKEN: ${{ secrets.EVALAI_AUTH_TOKEN }}
         run: |
           echo "is_valid=true" >> $GITHUB_OUTPUT
           echo "is_localhost=false" >> $GITHUB_OUTPUT
@@ -35,7 +37,7 @@ jobs:
             exit 0
           fi
 
-          TOKEN=$(jq -r '.token' github/host_config.json)
+          TOKEN="$EVALAI_AUTH_TOKEN"
           TEAM_PK=$(jq -r '.team_pk' github/host_config.json)
           HOST_URL=$(jq -r '.evalai_host_url' github/host_config.json)
 
@@ -60,7 +62,7 @@ jobs:
             echo "is_valid=false" >> $GITHUB_OUTPUT
           fi
 
-          if [[ -z "$TEAM_PK" || "$TEAM_PK" == "<host_team_pk>" ]]; then
+          if [[ ! "$TEAM_PK" =~ ^[0-9]+$ ]]; then
             echo "❌ Invalid or missing team_pk" | tee -a validation_error.log
             echo "is_valid=false" >> $GITHUB_OUTPUT
           fi
@@ -188,6 +190,7 @@ jobs:
           IS_VALIDATION: 'True'
           GITHUB_CONTEXT: ${{ toJson(github) }}
           GITHUB_AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          EVALAI_AUTH_TOKEN: ${{ secrets.EVALAI_AUTH_TOKEN }}
 
       - name: Validate challenge configuration (Self-hosted with Docker)
         if: needs.validate-host-config.outputs.requires_self_hosted == 'true'
@@ -198,6 +201,7 @@ jobs:
             --add-host host.docker.internal:host-gateway \
             -v "$(pwd):/workspace" \
             -w /workspace \
+            -e EVALAI_AUTH_TOKEN='${{ secrets.EVALAI_AUTH_TOKEN }}' \
             -e IS_VALIDATION='True' \
             -e GITHUB_CONTEXT='${{ toJson(github) }}' \
             -e GITHUB_REPOSITORY='${{ github.repository }}' \
@@ -218,6 +222,7 @@ jobs:
           IS_VALIDATION: 'False'
           GITHUB_CONTEXT: ${{ toJson(github) }}
           GITHUB_AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          EVALAI_AUTH_TOKEN: ${{ secrets.EVALAI_AUTH_TOKEN }}
 
       - name: Create or update challenge (Self-hosted with Docker)
         if: success() && needs.validate-host-config.outputs.requires_self_hosted == 'true'
@@ -228,6 +233,7 @@ jobs:
             --add-host host.docker.internal:host-gateway \
             -v "$(pwd):/workspace" \
             -w /workspace \
+            -e EVALAI_AUTH_TOKEN='${{ secrets.EVALAI_AUTH_TOKEN }}' \
             -e IS_VALIDATION='False' \
             -e GITHUB_CONTEXT='${{ toJson(github) }}' \
             -e GITHUB_REPOSITORY='${{ github.repository }}' \

@@ -10,6 +10,12 @@ EVALAI_ERROR_CODES = [400, 401, 406]
 API_HOST_URL = "https://eval.ai"
 IGNORE_DIRS = [
     ".git",
+    ".agents",
+    ".aws",
+    ".codex",
+    "local_submissions",
+    "tests",
+    "__pycache__",
     ".github",
     "github",
     "code_upload_challenge_evaluation",

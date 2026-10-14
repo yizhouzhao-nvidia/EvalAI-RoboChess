@@ -1,0 +1,11 @@
+{
+  "status": "draft",
+  "task": "basic_pick_and_place",
+  "metric": "Pick-and-place success rate (%)",
+  "formula": "100 * successful_trials / total_trials",
+  "protocol_version": null,
+  "trial_count": null,
+  "robot_or_simulator": null,
+  "success_criteria": null,
+  "note": "Finalize the protocol before publication or evaluation. This is not ground-truth data."
+}

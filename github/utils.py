@@ -145,7 +145,7 @@ def load_host_configs(config_path):
                 print("\nAn error occured while loading the host configs: {}".format(e))
                 sys.exit(1)
         data = json.loads(data)
-        host_auth_token = data["token"]
+        host_auth_token = os.environ.get("EVALAI_AUTH_TOKEN", "").strip() or data["token"]
         challenge_host_team_pk = data["team_pk"]
         evalai_host_url = data["evalai_host_url"]
         return [host_auth_token, challenge_host_team_pk, evalai_host_url]
