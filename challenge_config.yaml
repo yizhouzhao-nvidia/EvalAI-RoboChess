@@ -1,4 +1,5 @@
-# Draft: finalize trial protocol, submission limits, and artifact access before publication.
+# Public visibility requested; EvalAI administrator approval is required.
+# Finalize the trial protocol before running official evaluations.
 title: RoboChess Pick-and-Place Benchmark
 short_description: Submit pinned model links and inference instructions for local robotic pick-and-place evaluation.
 description: templates/description.html
@@ -13,7 +14,7 @@ remote_evaluation: true
 # Pacific schedule: Oct 14 00:00 PDT through Nov 7 23:59:59 PST, stored as UTC.
 start_date: 2026-10-14 07:00:00
 end_date: 2026-11-08 07:59:59
-published: false
+published: true
 tags: [robotics, manipulation, robochess, pytorch]
 leaderboard:
   - id: 1

@@ -102,10 +102,11 @@ this behavior on staging before promising a public ranking.
 
 ## Before launch
 
-The challenge is deliberately `published: false`. Finalize the protocol, schedule,
+The challenge requests public visibility with `published: true`. EvalAI administrator
+approval is still required before public participation. Finalize the protocol, schedule,
 submission limits and rules. The submission window is October 14 through
 November 7, 2026, Pacific time (UTC: October 14 07:00 through November 8 07:59:59).
-The logo uses the SO-101 scene from the RoboChess project. After staging validation and confirming linked artifact access, publish the challenge.
+The logo uses the SO-101 scene from the RoboChess project. Confirm linked artifact access and test the submission flow before inviting participants.
 
 References:
 - https://evalai.readthedocs.io/en/latest/02-for-challenge-hosts/evaluation/remote-evaluation.html

@@ -8,9 +8,9 @@ The official ranking uses only organizer-verified pick-and-place success rate (%
 Participants can optionally provide unverified self-reported scores as metadata.
 
 See [the organizer workflow](remote_challenge_evaluation/README.md) for checkpoint
-downloads and score publication. The challenge configuration is an unpublished draft;
-finalize the trial protocol, dates, limits, rules, logo, and access to linked artifacts before
-launch. The remote API workflow needs a staging integration check.
+downloads and score publication. Public visibility is requested with `published: true`; EvalAI administrator
+approval is still required for public participation. Finalize the trial protocol
+before official evaluation. The remote API workflow needs a staging integration check.
 
 Set the GitHub Actions secret `EVALAI_AUTH_TOKEN` to your EvalAI host token, and
 set `team_pk` to the numeric team ID in `github/host_config.json`. The `AUTH_TOKEN`
